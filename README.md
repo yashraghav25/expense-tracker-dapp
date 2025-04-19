@@ -1,7 +1,8 @@
 # On-Chain Expense Tracker DApp
 
 This decentralized application (DApp) allows users to track their expenses on the Ethereum blockchain. It interacts with a smart contract that stores expenses and user data on the blockchain. Users can register their name, add expenses, and track how much they owe or are owed. The DApp is built using React, the `ethers.js` library for blockchain interaction, and connects to MetaMask for Ethereum wallet management.
-
+![Alt text](https://github.com/yashraghav25/expense-tracker-dapp/blob/master/dapp_expenseTracker.png
+)
 ## Features
 
 1. **Display connected wallet address**  
