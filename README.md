@@ -25,10 +25,17 @@ This decentralized application (DApp) allows users to track their expenses on th
 - **ethers.js**: A library for interacting with the Ethereum blockchain.
 - **Solidity**: Smart contract language (Expense Tracker contract).
 - **MetaMask**: Ethereum wallet browser extension for managing accounts and transactions.
+## Updated Features
 
-## Installation
+### 1. **Get Your Own Name**
+   Allows a user to retrieve their registered name using their wallet address.
 
-**Clone the repository:**
-   ```bash
-   git clone https://github.com/your-repository/expense-tracker-dapp.git
-   cd expense-tracker-dapp
+   **Smart Contract Function**:
+   ```solidity
+   function getYourName() public view returns (string memory) {
+       require(
+           people[msg.sender].walletAddress != address(0),
+           "User not registered"
+       );
+       return people[msg.sender].name;
+   }
