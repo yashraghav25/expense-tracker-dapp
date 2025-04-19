@@ -20,7 +20,10 @@ function App() {
     { address: "", amountPaid: 0, amountOwed: 0 },
   ]); // People involved in a new expense
   const [showAddExpense, setShowAddExpense] = useState(false); // Whether to show the "Add Expense" form
-  const contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138"; // Paste the address recieved from Remix IDE here
+  const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS; // Paste the address recieved from Remix IDE here
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [lastExpenseLabel, setLastExpenseLabel] = useState("");
+
 
   // --- RUNS WHEN THE PAGE FIRST LOADS ---
   // This connects to the user's Ethereum wallet (like MetaMask)
@@ -209,6 +212,9 @@ function App() {
       }
 
       setExpenses(loaded); // Save all expenses to state
+            if (loaded.length > 0) {
+              setLastExpenseLabel(loaded[loaded.length - 1].label);
+            }
     } catch (error) {
       console.error("Error loading expenses:", error);
       alert("Could not load expenses. Check console.");
@@ -222,6 +228,7 @@ function App() {
   const loadPeople = async () => {
     if (!contract) return; // Skip if contract isn't ready
     try {
+
       // Get all registered addresses
       const addresses = await contract.getAllRegisteredPeople();
       // For each address, get their name and balance
@@ -236,7 +243,10 @@ function App() {
           };
         })
       );
-      setPeople(peopleData); // Save people to state
+      setPeople(peopleData);
+      setTotalUsers(peopleData.length); // Save people to state
+
+
     } catch (error) {
       console.error("Error loading people:", error);
     }
@@ -442,7 +452,9 @@ function App() {
                 ))}
               </tbody>
             </table>
-
+            <p>Total Registered Users: {totalUsers}</p>
+            <p>Last Expense: {lastExpenseLabel || "No expenses yet"}</p>
+            <p>Wallet Registered: {isRegistered ? "Yes" : "No"}</p>
             {/* EXPENSE HISTORY - Show all expenses */}
             <h3>Expense History</h3>
             {loadingExpenses ? (
