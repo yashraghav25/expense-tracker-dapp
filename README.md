@@ -39,3 +39,50 @@ This decentralized application (DApp) allows users to track their expenses on th
        );
        return people[msg.sender].name;
    }
+```
+### 2. **Check if a user is registered**
+   Returns true or false based on whether a user has registered.
+
+   **Smart Contract Function**:
+   ```solidity
+   function isUserRegistered(address _addr) public view returns (bool) {
+        return people[_addr].walletAddress != address(0);
+    }
+```
+### 3. **Get total number of registered people**
+   Returns the total number of registered users on the platform.
+
+   **Smart Contract Function**:
+   ```solidity
+   function isUserRegistered(address _addr) public view returns (bool) {
+        return people[_addr].walletAddress != address(0);
+    }
+```
+### 4. **Get label of the last expense**
+   Fetches the description of the most recently added expense.
+
+   **Smart Contract Function**:
+   ```solidity
+   function getLastExpenseLabel() public view returns (string memory) {
+        require(expenseCount > 0, "No expenses yet");
+        return expenses[expenseCount - 1].label;
+    }
+```
+### 5. **Update your name**
+   Lets a user update their registered name.
+
+   **Smart Contract Function**:
+   ```solidity
+   function updateName(string memory _newName) public {
+        require(bytes(_newName).length > 0, "New name cannot be empty");
+        require(
+            people[msg.sender].walletAddress != address(0),
+            "User not registered"
+        );
+
+        people[msg.sender].name = _newName;
+        emit PersonUpdated(msg.sender, _newName);
+    }
+```
+
+
