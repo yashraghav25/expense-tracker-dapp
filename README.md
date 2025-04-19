@@ -28,7 +28,7 @@ This decentralized application (DApp) allows users to track their expenses on th
 
 ## Installation
 
-1. **Clone the repository:**
+**Clone the repository:**
    ```bash
    git clone https://github.com/your-repository/expense-tracker-dapp.git
    cd expense-tracker-dapp
